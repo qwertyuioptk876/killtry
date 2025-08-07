@@ -1,5 +1,58 @@
-local victim = game.Players:FindFirstChild("NG_COCOO")
-if victim then
-    local remote = game:GetService("ReplicatedStorage"):WaitForChild("Flowing Water")
-    remote:FireServer(victim.Character, 999999)
+local rs = game:GetService("ReplicatedStorage")
+
+-- 遞迴列印 table 資料
+local function dumpTable(t, indent)
+    indent = indent or 0
+    local prefix = string.rep("  ", indent)
+    if type(t) ~= "table" then
+        print(prefix .. tostring(t))
+        return
+    end
+    for k, v in pairs(t) do
+        if type(v) == "table" then
+            print(prefix .. tostring(k) .. ":")
+            dumpTable(v, indent + 1)
+        else
+            print(prefix .. tostring(k) .. ": " .. tostring(v))
+        end
+    end
 end
+
+-- 🔹 監聽來自伺服器的事件
+for _, v in ipairs(rs:GetDescendants()) do
+    if v:IsA("RemoteEvent") then
+        v.OnClientEvent:Connect(function(...)
+            print("📩 來自 Server 的事件：", v:GetFullName())
+            local args = {...}
+            for i, arg in ipairs(args) do
+                print("   🔹 參數 " .. i .. ":")
+                dumpTable(arg)
+            end
+        end)
+    end
+end
+
+-- 🔸 監聽客戶端傳送給伺服器的 FireServer 呼叫（需 Delta / Synapse 支援）
+local mt = getrawmetatable(game)
+setreadonly(mt, false)
+
+local oldNamecall = mt.__namecall
+
+mt.__namecall = newcclosure(function(self, ...)
+    local args = {...}
+    local method = getnamecallmethod()
+
+    -- 🔍 監聽 FireServer 呼叫
+    if method == "FireServer" and self:IsA("RemoteEvent") then
+        print("🚀 客戶端 → Server 的事件：", self:GetFullName())
+        for i, arg in ipairs(args) do
+            print("   📨 參數 " .. i .. ":")
+            dumpTable(arg)
+        end
+    end
+
+    return oldNamecall(self, ...)
+end)
+
+setreadonly(mt, true)
+
