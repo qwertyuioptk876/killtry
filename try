@@ -1,0 +1,5 @@
+local victim = game.Players:FindFirstChild("NG_COCOO")
+if victim then
+    local remote = game:GetService("ReplicatedStorage"):WaitForChild("Flowing water")
+    remote:FireServer(victim.Character, 999999)
+end
