@@ -1,0 +1,498 @@
+local system_domain = "https://get-key.keysystem352.workers.dev/"
+local system_domain2 = "https://get-key.keysystem2352.workers.dev/"
+local system_domain3 = "https://get-key.keysystem3352.workers.dev/"
+local system_status = false
+local key_system = false --make it false to disable key system
+local valid_key = flase
+local key_pass = 1529641694
+
+local key_link = "https://tpi.li/key-system"
+local key_link2 = "https://tpi.li/key-system2"
+local key_link3 = "https://tpi.li/key-system3"
+
+pcall(function()
+if game:HttpGet(system_domain.."status") == "true" then
+   system_status = true
+end
+end)
+
+pcall(function()
+if system_status == false then
+   if game:HttpGet(system_domain2.."status") == "true" then
+      system_status = true
+      system_domain = system_domain2
+      key_link = key_link2
+   end
+end
+end)
+
+pcall(function()
+if system_status == false then
+   if game:HttpGet(system_domain3.."status") == "true" then
+      system_status = true
+      system_domain = system_domain3
+      key_link = key_link3
+   end
+end
+end)
+
+
+if system_status == true and key_system == true then
+   --[[ Base64 Encoder & Decoder
+   local Decoded = EncodeBase64("Hello World") --use this to encode base64 message
+   local Encoded = DecodeBase64("SGVsbG8gV29ybGQ=") --use this to decode base64 message
+   ]]
+   loadstring(game:HttpGet("https://raw.githubusercontent.com/MainScripts352/MainScripts352/refs/heads/main/Base64%20Encoder%20%26%20Decoder%20Source"))()
+   ---
+
+   ---Get Timestamp with days expiration function
+   local function getTimestamp(days)
+    days = days or 0
+    local time = game:HttpGet(system_domain.."time")
+    local addedMs = days * 24 * 60 * 60 * 1000
+    return tonumber(time) + addedMs
+   end
+   ---
+
+   ---Find Index Of String Function
+   local function FindIndex(Word:string, Letter:string, start)
+    start = start or 1
+    for i = start, #Word, start do
+      if string.sub(Word, i, i) == Letter then
+         return i
+      end
+    end
+   end
+   ---
+   
+   ---Check Key Function
+   local function CheckKey(key)
+    if string.find(key, "_") and string.len(key) >= 25 then
+       local timestamp = nil
+       pcall(function()
+       timestamp = tonumber(game:HttpGet(system_domain.."check/KEY_"..key:sub(FindIndex(key, "_") + 1, string.len(key))))
+       end)
+       if timestamp ~= nil and timestamp >= getTimestamp() then
+          return true
+       end
+    end
+    return false
+   end
+   ---
+   
+   local function ShowKeyGui()
+    local CollectionService = game:GetService("CollectionService");
+    local G2L = {};
+    G2L["ScreenGui_1"] = Instance.new("ScreenGui", game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"));
+    G2L["ScreenGui_1"]["ZIndexBehavior"] = Enum.ZIndexBehavior.Sibling;
+    CollectionService:AddTag(G2L["ScreenGui_1"], [[main]]);
+    G2L["Frame_2"] = Instance.new("Frame", G2L["ScreenGui_1"]);
+    G2L["Frame_2"]["BorderSizePixel"] = 0;
+    G2L["Frame_2"]["BackgroundColor3"] = Color3.fromRGB(30, 30, 30);
+    G2L["Frame_2"]["Size"] = UDim2.new(0, 322, 0, 168);
+    G2L["Frame_2"]["Position"] = UDim2.new(0.28,0,0.20);
+    G2L["Frame_2"]["Draggable"] = true;
+    G2L["Frame_2"]["Active"] = true;
+    G2L["UICorner_3"] = Instance.new("UICorner", G2L["Frame_2"]);
+    G2L["TextLabel_4"] = Instance.new("TextLabel", G2L["Frame_2"]);
+    G2L["TextLabel_4"]["TextWrapped"] = true;
+    G2L["TextLabel_4"]["BorderSizePixel"] = 0;
+    G2L["TextLabel_4"]["TextSize"] = 14;
+    G2L["TextLabel_4"]["TextScaled"] = true;
+    G2L["TextLabel_4"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+    G2L["TextLabel_4"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+    G2L["TextLabel_4"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+    G2L["TextLabel_4"]["BackgroundTransparency"] = 1;
+    G2L["TextLabel_4"]["Size"] = UDim2.new(0, 142, 0, 26);
+    G2L["TextLabel_4"]["Text"] = [[KEY SYSTEM]];
+    G2L["TextLabel_4"]["Position"] = UDim2.new(0, 92, 0, 6);
+    G2L["TextBox_5"] = Instance.new("TextBox", G2L["Frame_2"]);
+    G2L["TextBox_5"]["CursorPosition"] = -1;
+    G2L["TextBox_5"]["BorderSizePixel"] = 0;
+    G2L["TextBox_5"]["TextWrapped"] = true;
+    G2L["TextBox_5"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+    G2L["TextBox_5"]["BackgroundColor3"] = Color3.fromRGB(64, 64, 64);
+    G2L["TextBox_5"]["PlaceholderText"] = [[INPUT KEY]];
+    G2L["TextBox_5"]["Size"] = UDim2.new(0, 232, 0, 34);
+    G2L["TextBox_5"]["Position"] = UDim2.new(0, 42, 0, 44);
+    G2L["TextBox_5"]["Text"] = [[]];
+    G2L["UICorner_6"] = Instance.new("UICorner", G2L["TextBox_5"]);
+    G2L["TextButton_7"] = Instance.new("TextButton", G2L["Frame_2"]);
+    G2L["TextButton_7"]["TextWrapped"] = true;
+    G2L["TextButton_7"]["BorderSizePixel"] = 0;
+    G2L["TextButton_7"]["TextSize"] = 18;
+    G2L["TextButton_7"]["TextColor3"] = Color3.fromRGB(229, 229, 229);
+    G2L["TextButton_7"]["BackgroundColor3"] = Color3.fromRGB(156, 156, 156);
+    G2L["TextButton_7"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal);
+    G2L["TextButton_7"]["Size"] = UDim2.new(0, 108, 0, 32);
+    G2L["TextButton_7"]["Text"] = [[SUBMIT]];
+    G2L["TextButton_7"]["Position"] = UDim2.new(0, 44, 0, 92);
+    G2L["UICorner_8"] = Instance.new("UICorner", G2L["TextButton_7"]);
+    G2L["TextButton_9"] = Instance.new("TextButton", G2L["Frame_2"]);
+    G2L["TextButton_9"]["TextWrapped"] = true;
+    G2L["TextButton_9"]["BorderSizePixel"] = 0;
+    G2L["TextButton_9"]["TextSize"] = 18;
+    G2L["TextButton_9"]["TextColor3"] = Color3.fromRGB(229, 229, 229);
+    G2L["TextButton_9"]["BackgroundColor3"] = Color3.fromRGB(156, 156, 156);
+    G2L["TextButton_9"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal);
+    G2L["TextButton_9"]["Size"] = UDim2.new(0, 108, 0, 32);
+    G2L["TextButton_9"]["Text"] = [[GET KEY]];
+    G2L["TextButton_9"]["Position"] = UDim2.new(0, 166, 0, 92);
+    G2L["UICorner_a"] = Instance.new("UICorner", G2L["TextButton_9"]);
+    G2L["TextLabel_b"] = Instance.new("TextBox", G2L["Frame_2"]);
+    G2L["TextLabel_b"]["BorderSizePixel"] = 0;
+    G2L["TextLabel_b"]["BackgroundColor3"] = Color3.fromRGB(255, 64, 64);
+    G2L["TextLabel_b"]["TextColor3"] = Color3.fromRGB(231, 231, 231);
+    G2L["TextLabel_b"]["BackgroundTransparency"] = 1;
+    G2L["TextLabel_b"]["TextSize"] = 6;
+    G2L["TextLabel_b"]["MultiLine"] = true;
+    G2L["TextLabel_b"]["Size"] = UDim2.new(0, 226, 0, 36);
+    G2L["TextLabel_b"]["Text"] = "How to get key? try watch this tutorial:\nhttps://youtube.com/shorts/5TiCAIVHT-A?si=M3ommkyBSTvTd2sj";
+    G2L["TextLabel_b"]["Position"] = UDim2.new(0, 48, 0, 130);
+    G2L["TextLabel_c"] = Instance.new("TextBox", G2L["Frame_2"]);
+    G2L["TextLabel_c"]["BorderSizePixel"] = 0;
+    G2L["TextLabel_c"]["BackgroundColor3"] = Color3.fromRGB(255, 64, 64);
+    G2L["TextLabel_c"]["TextColor3"] = Color3.fromRGB(231, 231, 231);
+    G2L["TextLabel_c"]["BackgroundTransparency"] = 1;
+    G2L["TextLabel_c"]["TextSize"] = 6;
+    G2L["TextLabel_c"]["MultiLine"] = true;
+    G2L["TextLabel_c"]["Size"] = UDim2.new(0, 226, 0, 36);
+    G2L["TextLabel_c"]["Text"] = "Wants a key free? https://www.roblox.com/game-pass/"..key_pass.."/Access-Card";
+    G2L["TextLabel_c"]["Position"] = UDim2.new(0, 48, 0, 155);
+       
+    local tutorialtext = G2L["TextLabel_b"]["Text"];
+    G2L["TextLabel_b"]:GetPropertyChangedSignal("Text"):Connect(function()
+    G2L["TextLabel_b"]["Text"] = tutorialtext;
+    end)
+
+    local keypasstext = G2L["TextLabel_c"]["Text"];
+    G2L["TextLabel_c"]:GetPropertyChangedSignal("Text"):Connect(function()
+    G2L["TextLabel_c"]["Text"] = keypasstext;
+    end)
+    
+    G2L["TextButton_7"].MouseButton1Click:Connect(function()
+    pcall(function()
+    if CheckKey(G2L["TextBox_5"]["Text"]) == true then
+       if writefile then
+          writefile("Ghosthub/.key", G2L["TextBox_5"]["Text"])
+       end
+       valid_key = true
+       G2L["TextButton_7"]["Parent"]["Parent"]:Destroy()
+    end
+    end)
+    if valid_key ~= true then
+       local text = G2L["TextBox_5"]["Text"]
+       G2L["TextBox_5"]["Text"] = "Invalid Key"
+       G2L["TextBox_5"]["TextColor3"] = Color3.fromRGB(255, 0, 0);
+       wait(1)
+       G2L["TextBox_5"]["Text"] = text
+       G2L["TextBox_5"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+    end
+    end)
+ 
+    G2L["TextButton_9"].MouseButton1Click:Connect(function()
+    G2L["TextButton_9"]["Text"] = "Receive Link!"
+    local link = key_link
+    if setclipboard then
+       setclipboard(link)
+    end
+    G2L["TextBox_5"]["Text"] = link
+    G2L["TextBox_5"]["ClearTextOnFocus"] = false
+    G2L["TextButton_9"]["Text"] = "GET KEY"
+    end)
+    return G2L["ScreenGui_1"], require;
+   end
+
+   if isfile and readfile and isfile("Ghosthub/.key") and CheckKey(readfile("Ghosthub/.key")) == true or game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, key_pass) then
+      valid_key = true
+   else
+      ShowKeyGui()
+   end
+
+   while valid_key == false do
+     task.wait()
+   end
+end
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Ghostplayer = "seth_ka123"
+local Admins = {"Pxrple001","bestgamer_pogi24","EC_BOT1","FEWithoutEffort","qwertyuioptk888"}
+
+--[[ Commands List ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+:showusers
+:hideusers
+
+:kill
+:kill all
+:freeze
+:unfreeze
+:kick 
+:kick all
+:exit
+:exit all
+:bring
+:bring all
+:disablecontrol
+:enablecontrol
+:laydown
+:dance
+:dance all
+:walktome
+:avoidbang
+:fling
+:jump
+:sit
+:say
+:
+
+]]------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+if not game:GetService("ReplicatedStorage"):FindFirstChild("Admin") then
+   local String = Instance.new("StringValue")
+   String.Parent = game:GetService("ReplicatedStorage")
+   String.Name = "Admin"
+   String.Archivable = true
+   String.Value = ""
+
+
+   ---Remove Name in Table Function
+   local function RemoveUser(name)
+    for key, value in pairs(UsersFound) do
+      if value == name then
+         UsersFound[key] = nil
+      end
+    end
+   end
+   ---
+
+
+   ---Find Admin in List Table Function
+   local function CheckAdmin(name)
+    for key, value in pairs(Admins) do
+      if value == name then
+         return true
+      end
+    end
+    return false
+   end
+   ---
+
+
+   ---Find Index Of String Function
+   local function FindIndex(Word, Letter, start)
+    if start == nil then
+       start = 1
+    end
+    local found_count = 0
+    local index = 0
+    repeat
+      index += 1
+      if Word:sub(index, index) == Letter then
+         found_count += 1
+      end
+    until found_count == start or index == string.len(Word)
+    return index
+   end
+   ---
+
+
+   ---Count Character Count in a String Function
+   local function CountCharacter(string, character)
+    local count = 0
+    for i = 1, #string do
+      if string.sub(string, i, i) == character then
+         count = count + 1
+      end
+    end
+    return count
+   end
+   ---
+   
+   
+   ---Send Message Function
+   local function SendMessage(msg)
+    if game:GetService("TextChatService").TextChannels.RBXGeneral then
+       game:GetService("TextChatService").TextChannels.RBXGeneral:SendAsync(msg)
+    else
+       game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(msg, "All")
+    end
+   end
+   ---
+
+
+   ---Users Detector Operator
+   local UsersFound = {}
+   local ShowUsers = false
+   game:GetService("RunService").RenderStepped:Connect(function()
+   if ShowUsers == true then
+      for i,v in pairs(game.Players:GetPlayers()) do
+        if v.Character:FindFirstChild("HumanoidRootPart") and not v.Character.HumanoidRootPart:FindFirstChild("USER ESP") then
+           for key, value in pairs(UsersFound) do
+             if value == v.Name then
+                local BillboardGui = Instance.new("BillboardGui")
+                local TextLabel = Instance.new("TextLabel")
+                local UICorner = Instance.new("UICorner") 
+ 
+                BillboardGui.Parent = v.Character:FindFirstChild("HumanoidRootPart")
+                BillboardGui.Name = "USER ESP"
+                BillboardGui.AlwaysOnTop = true
+                BillboardGui.LightInfluence = 0
+                BillboardGui.Size = UDim2.new(0, 8, 0, 8)
+                BillboardGui.StudsOffset = Vector3.new(0, 0, 0)
+
+                TextLabel.Parent = BillboardGui
+                TextLabel.BackgroundColor3 = Color3.new(1,1,1)
+                TextLabel.BackgroundTransparency = 1
+                TextLabel.Size = UDim2.new(1, 0, 1, 0)
+                TextLabel.Text = v.Name
+                TextLabel.TextColor3 = Color3.new(1,1,1)
+                TextLabel.Visible = false
+             end
+           end
+        end
+      end
+      for _, v in pairs(game.Players:GetPlayers()) do 
+        if v.Character:FindFirstChild("HumanoidRootPart") and v.Character.HumanoidRootPart:FindFirstChild("USER ESP") and v.Character.HumanoidRootPart:FindFirstChild("USER ESP").TextLabel.Visible == false then
+           v.Character.HumanoidRootPart:FindFirstChild("USER ESP").TextLabel.Visible = true
+        end
+      end
+   end
+   end)
+   ---
+
+
+   ---Execute Command Function
+   local function ExecuteAdminCMD(admin)
+    game.Players[admin.Name].Chatted:Connect(function(admin_msg)
+    local MyName = game.Players.LocalPlayer.Name
+    local MyDisplayName = game.Players.LocalPlayer.DisplayName
+ 
+    if admin_msg:sub(1,1) ~= ":" then
+       return
+    end
+    
+    ---Only Admin Script
+    if admin_msg == ":showusers" then
+       ShowUsers = true
+    elseif admin_msg == ":hideusers" then
+       ShowUsers = false
+       for _, v in pairs(game.Players:GetPlayers()) do 
+         if v.Character.HumanoidRootPart:FindFirstChild("USER ESP") then
+            v.Character.HumanoidRootPart:FindFirstChild("USER ESP").TextLabel.Visible = false
+         end
+       end
+    end
+    ---
+    
+    if string.find(admin_msg, " ") then
+       if CountCharacter(admin_msg, " ") == 1 then
+          local user = admin_msg:sub(FindIndex(admin_msg, " ") + 1, string.len(admin_msg))
+          if string.find(MyName, user) or string.find(MyDisplayName, user) then
+             MyName = user
+          end
+       else
+          local user = admin_msg:sub(FindIndex(admin_msg, " ") + 1, FindIndex(admin_msg, " ", 2) - 1)
+          if string.find(MyName, user) or string.find(MyDisplayName, user) then
+             MyName = user
+          end
+       end
+    end
+    
+    if admin_msg == ":kill "..MyName or admin_msg == ":kill "..MyDisplayName or admin_msg == ":kill all" and MyName ~= admin.Name and MyName ~= Ghostplayer then
+       game.Players.LocalPlayer.Character.Head:Destroy()
+    elseif admin_msg == ":freeze "..MyName or admin_msg == ":freeze "..MyDisplayName then
+       game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true
+    elseif admin_msg == ":unfreeze "..MyName or admin_msg == ":unfreeze "..MyDisplayName then
+       game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
+    elseif string.find(admin_msg.." ", ":kick "..MyName) or string.find(admin_msg.." ", ":kick "..MyDisplayName) or string.find(admin_msg.." ", ":kick all".." ") and MyName ~= admin.Name and MyName ~= Ghostplayer then
+       game.Players.LocalPlayer:Kick(admin_msg:sub(FindIndex(admin_msg, " ", 2) + 1, string.len(admin_msg)))
+    elseif admin_msg == ":exit "..MyName or admin_msg == ":exit "..MyDisplayName or admin_msg == ":exit all" and MyName ~= admin.Name and MyName ~= Ghostplayer then
+       game:Shutdown()
+    elseif admin_msg == ":bring "..MyName or admin_msg == ":bring "..MyDisplayName or admin_msg == ":bring all" and MyName ~= admin.Name and MyName ~= Ghostplayer then
+       game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = admin.Character.HumanoidRootPart.CFrame
+    elseif admin_msg == ":disablecontrol "..MyName or admin_msg == ":disablecontrol "..MyDisplayName then
+       controls = require(game:GetService("Players").LocalPlayer.PlayerScripts.PlayerModule):GetControls() controls:Disable()
+    elseif admin_msg == ":enablecontrol "..MyName or admin_msg == ":enablecontrol "..MyDisplayName then
+       controls = require(game:GetService("Players").LocalPlayer.PlayerScripts.PlayerModule):GetControls() controls:Enable()
+    elseif admin_msg == ":laydown "..MyName or admin_msg == ":laydown "..MyDisplayName then
+       game.Players.LocalPlayer.Character.Humanoid.Sit = true
+       task.wait(0.1)
+       game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.Angles(math.pi * 0.5, 0, 0)
+       for _, v in ipairs(game.Players.LocalPlayer.Character.Humanoid:GetPlayingAnimationTracks()) do
+         v:Stop()
+       end
+    elseif admin_msg == ":dance "..MyName or admin_msg == ":dance "..MyDisplayName or admin_msg == ":dance all" and MyName ~= admin.Name and MyName ~= Ghostplayer then
+       SendMessage("/e dance")
+    elseif admin_msg == ":fling "..MyName or admin_msg == ":fling "..MyDisplayName then
+       bambam = Instance.new("BodyThrust")
+       bambam.Parent = game.Players.LocalPlayer.Character.HumanoidRootPart
+       bambam.Force = Vector3.new(999990,0,999990)
+       bambam.Location = game.Players.LocalPlayer.Character.HumanoidRootPart.Position 
+    elseif admin_msg == ":sit "..MyName or admin_msg == ":sit "..MyDisplayName then
+       game.Players.LocalPlayer.Character.Humanoid.Sit = true
+    elseif admin_msg == ":jump "..MyName or admin_msg == ":jump "..MyDisplayName then
+       game.Players.LocalPlayer.Character.Humanoid.Jump = true
+    elseif admin_msg == ":walktome "..MyName or admin_msg == ":walktome "..MyDisplayName then
+       game.Players.LocalPlayer.Character.Humanoid:MoveTo(admin.Character:FindFirstChild("HumanoidRootPart").Position)
+    elseif admin_msg == ":avoidbang "..MyName or admin_msg == ":avoidbang "..MyDisplayName then
+       workspace.FallenPartsDestroyHeight = -1000
+       local lastCFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+       game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(Vector3.new(0, -500, 0))
+       wait(0.7)
+       game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = lastCFrame
+       workspace.FallenPartsDestroyHeight = -500
+    elseif string.find(admin_msg, ":say "..MyName.." ") or string.find(admin_msg, ":say "..MyDisplayName.." ") then
+       SendMessage(admin_msg:sub(FindIndex(admin_msg, " ", 2) + 1, string.len(admin_msg)))
+    elseif admin_msg == ":" and MyName ~= admin.Name and MyName ~= Ghostplayer then
+       SendMessage("✅ Im Here ✅")
+       wait(0.1)
+       for i,v in pairs(game.CoreGui:GetDescendants()) do
+         if v.ClassName == "TextLabel" and string.find(v.Text, "✅ Im Here ✅") or v.ClassName == "TextButton" and string.find(v.Text, "✅ Im Here ✅") then
+            v.Parent:Destroy()
+         end
+       end
+    end
+    end)
+   end
+   ---
+
+   for _, v in pairs(game.Players:GetPlayers()) do 
+     if v.Name == Ghostplayer or CheckAdmin(v.Name) == true then
+        ExecuteAdminCMD(v)
+     else
+       v.Chatted:Connect(function(msg)
+       if msg == "✅ Im Here ✅" then
+          table.insert(UsersFound, v.Name)
+       end
+       end)
+    end
+   end
+
+   game.Players.PlayerAdded:Connect(function(plr)
+   if plr.Name == Ghostplayer or CheckAdmin(plr.Name) == true then
+      ExecuteAdminCMD(plr)
+   else
+      v.Chatted:Connect(function(msg)
+      if msg == "✅ Im Here ✅" then
+         table.insert(UsersFound, v.Name)
+      end
+      end)
+   end
+   end)
+end
