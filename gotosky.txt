@@ -348,3 +348,4 @@ else
    TextButton.Text = "Auto Fling"
    getgenv().flingloop = false
 end
+end)
