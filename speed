@@ -1,5 +1,4 @@
--- local tspeed = 1
-local tspeed = 1 -- 你想改速度的地方
+local tspeed = 1.5
 
 local hb = game:GetService("RunService").Heartbeat
 local tpwalking = true
