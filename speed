@@ -1,0 +1,23 @@
+-- local tspeed = 1
+local tspeed = 1 -- 你想改速度的地方
+
+local hb = game:GetService("RunService").Heartbeat
+local tpwalking = true
+local player = game:GetService("Players")
+local lplr = player.LocalPlayer
+local chr = lplr.Character
+local hum = chr and chr:FindFirstChildWhichIsA("Humanoid")
+
+function isNumber(str)
+    return tonumber(str) ~= nil or str == 'inf'
+end
+
+while tpwalking and hb:Wait() and chr and hum and hum.Parent do
+    if hum.MoveDirection.Magnitude > 0 then
+        if tspeed and isNumber(tspeed) then
+            chr:TranslateBy(hum.MoveDirection * tonumber(tspeed))
+        else
+            chr:TranslateBy(hum.MoveDirection)
+        end
+    end
+end
